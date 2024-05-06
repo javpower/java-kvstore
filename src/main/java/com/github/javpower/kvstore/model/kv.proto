@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message KvPair {
+  string key = 1;
+  string value = 2;
+  int64 expire_timestamp = 3;
+}
+
+message Storage {
+  repeated KvPair kv_pairs = 1;
+}
