@@ -22,7 +22,7 @@
 <dependency>
   <groupId>io.github.javpower</groupId>
   <artifactId>kvstore-spring-boot-starter</artifactId>
-  <version>2.7.13</version>
+  <version>2.7.14</version>
 </dependency>
 ```
 

@@ -1,7 +1,8 @@
 package com.github.javpower.kvstore.command.impl;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javpower.kvstore.command.RedisCommand;
 import com.github.javpower.kvstore.engine.StorageEngine;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +21,14 @@ public class LPopCommand implements RedisCommand<String> {
         }
         String key = args.get(0);
         String v = storage.get(key);
+        ObjectMapper objectMapper = new ObjectMapper();
         if (StrUtil.isNotEmpty(v)) {
-            LinkedHashMap<String, String> list = JSONUtil.toBean(v, LinkedHashMap.class);
+            LinkedHashMap<String, String> list = null;
+            try {
+                list = objectMapper.readValue(v, LinkedHashMap.class);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
             if (list == null || list.isEmpty()) {
                 return null;
             }
@@ -29,7 +36,13 @@ public class LPopCommand implements RedisCommand<String> {
             Map.Entry<String, String> firstEntry = list.entrySet().iterator().next();
             String value = firstEntry.getKey();
             list.remove(value);
-            storage.set(key, JSONUtil.toJsonStr(list), -1);
+            String jsonString = null;
+            try {
+                jsonString = objectMapper.writeValueAsString(list);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            storage.set(key, jsonString, -1); // 序列化列表
             return value;
         }
         return null;

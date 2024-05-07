@@ -59,7 +59,7 @@ public class KvstoreUtil {
     }
 
     // LPUSH命令
-    public String lpush(String key, String... values) {
+    public List<String> lpush(String key, String... values) {
         List<String> args = new ArrayList<>();
         args.add(RedisCommandType.LPUSH.name());
         args.add(key);
@@ -73,7 +73,7 @@ public class KvstoreUtil {
     }
 
     // RPUSH命令
-    public String rpush(String key, String... values) {
+    public  List<String> rpush(String key, String... values) {
         List<String> args = new ArrayList<>();
         args.add(RedisCommandType.RPUSH.name());
         args.add(key);

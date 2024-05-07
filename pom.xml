@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.javpower</groupId>
     <artifactId>kvstore-spring-boot-starter</artifactId>
-    <version>2.7.13</version>
+    <version>2.7.14</version>
     <name>kvstore-spring-boot-starter</name>
     <description>a tool about java-kvstore</description>
     <url>https://github.com/javpower/java-kvstore</url>
@@ -55,11 +55,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.dreamlu</groupId>
-            <artifactId>mica-http</artifactId>
-            <version>${mica-http.version}</version>
         </dependency>
         <dependency>
             <groupId>net.dreamlu</groupId>
